@@ -46,4 +46,11 @@
     <string name="minimumSpeedIntentKey">minimumSpeedIntentKey</string>
     <string name="maximumSpeedIntentKey">maximumSpeedIntentKey</string>
 
+     <!--
+     Alert dialog messages and titles
+     !-->
+    <string name="spentTimeForExerciseSoLowMessage">Egzersiz için harcanan süre uzmanlarımızın bu egzersizi bitirmek için tanımladığı minimum sürenin altında. Lütfen egzersizi istenilen tekrarda tamamladığınızdan emin olup tekrar deneyiniz.</string>
+    <string name="spentTimeForExerciseSoLowTitle">Süre Çok Kısa</string>
+    <string name="spentTimeForExerciseSoLowBtnText">Egzersize Devam Et</string>
+
 </resources>

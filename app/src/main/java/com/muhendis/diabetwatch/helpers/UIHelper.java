@@ -222,6 +222,32 @@ public class UIHelper {
         return Arrays.asList(arr);
     }
 
+    public void showSimpleAlertWithButton(String title,String message,String btnText)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        // set title
+        alertDialogBuilder.setTitle(title);
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(message)
+                .setPositiveButton(btnText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+
     public void createPermanentNotificationForSpeed(String title, String body, int logo)
     {
         int drawableId=R.drawable.logo;

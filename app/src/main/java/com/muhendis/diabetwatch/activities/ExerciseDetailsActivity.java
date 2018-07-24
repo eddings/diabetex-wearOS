@@ -132,7 +132,7 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
         mDoneButton = findViewById(R.id.exerciseDoneButton);
         mDbHelper = new DiabetWatchDbHelper(getApplicationContext());
         mLocalDbHelper = new LocalDBHelper(mDbHelper,this);
-        mUIHelper = new UIHelper(getApplicationContext());
+        mUIHelper = new UIHelper(this);
         mFirebaseDbHelper = new FirebaseDBHelper(getApplicationContext(),this);
 
         eid = getIntent().getStringExtra(Keys.EX_ID);
@@ -299,26 +299,40 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
                 .setCancelable(true)
                 .setPositiveButton("TAMAM",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        if(mSensorManager!=null){
-                            mSensorManager.unregisterListener(activity);
-                        }
-                        walkingSpeeds = LocationService.getInstance().walkingSpeeds;
-                        walkedDistance = LocationService.getInstance().walkedDistance;
-                        StatisticsExerciseFirebaseDb statisticsExerciseFirebaseDb = new StatisticsExerciseFirebaseDb(getCurrentDate(), mExercise.getEid(),mExercise.getPid(),mExercise.getUid(),(int)elapsedTime,stepCounter,heartRate,walkingSpeeds,mExercise.getIsWalking(),walkedDistance);
-                        mLocalDbHelper.insertStatisticsExercise(statisticsExerciseFirebaseDb,mFirebaseDbHelper);
-                        if(startIntent!=null){
-                            stopService(startIntent);
-                        }
-                        if(mLocalDbHelper.isAllExerciseFinishedForProgram(mExercise.getPid()))
+                        // Calculate the min time which should pass to finish this exercise
+                        int minTimeForExercise = mExercise.getDuration()*mExercise.getReps()*mExercise.getSets();
+
+                        // Check if spent time for this exercise is enough
+                        // If not don not let user to finish exercise
+                        if((int)elapsedTime<minTimeForExercise)
                         {
                             dialog.dismiss();
-                            showProgramFinished(mLocalDbHelper,mExercise.getPid());
+                            mUIHelper.showSimpleAlertWithButton(getResources().getString(R.string.spentTimeForExerciseSoLowTitle),getResources().getString(R.string.spentTimeForExerciseSoLowMessage),getResources().getString(R.string.spentTimeForExerciseSoLowBtnText));
                         }
-                        else
-                        {
-                            setResult(Keys.FINISHED_EXERCISE_RESULT_CODE);
-                            finish();
+                        else{
+                            // Finish exercise
+                            if(mSensorManager!=null){
+                                mSensorManager.unregisterListener(activity);
+                            }
+                            walkingSpeeds = LocationService.getInstance().walkingSpeeds;
+                            walkedDistance = LocationService.getInstance().walkedDistance;
+                            StatisticsExerciseFirebaseDb statisticsExerciseFirebaseDb = new StatisticsExerciseFirebaseDb(getCurrentDate(), mExercise.getEid(),mExercise.getPid(),mExercise.getUid(),(int)elapsedTime,stepCounter,heartRate,walkingSpeeds,mExercise.getIsWalking(),walkedDistance);
+                            mLocalDbHelper.insertStatisticsExercise(statisticsExerciseFirebaseDb,mFirebaseDbHelper);
+                            if(startIntent!=null){
+                                stopService(startIntent);
+                            }
+                            if(mLocalDbHelper.isAllExerciseFinishedForProgram(mExercise.getPid()))
+                            {
+                                dialog.dismiss();
+                                showProgramFinished(mLocalDbHelper,mExercise.getPid());
+                            }
+                            else
+                            {
+                                setResult(Keys.FINISHED_EXERCISE_RESULT_CODE);
+                                finish();
+                            }
                         }
+
 
                     }
                 })
