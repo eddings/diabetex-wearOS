@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".activities.ExerciseVideoActivity"
+    tools:deviceIds="wear">
+    <FrameLayout
+        android:id="@+id/mExoVideoFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:boxedEdges="all"
+        >
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/mExoPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:boxedEdges="all"
+        >
+
+        <ImageView
+            android:id="@+id/videoGifImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+
+</android.support.wear.widget.BoxInsetLayout>

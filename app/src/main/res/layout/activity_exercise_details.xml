@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/box_inset_layout_padding"
+        android:paddingBottom="30dp">
+        <android.support.wear.widget.BoxInsetLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_grey"
+            android:padding="@dimen/box_inset_layout_padding"
+            tools:context=".activities.ExerciseDetailsActivity"
+            tools:deviceIds="wear">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/exHeader"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:gravity="top|center_horizontal"
+                    android:text="Egzersiz Başlığı"
+                    android:inputType="textMultiLine"
+                    android:textSize="@dimen/exercise_details_info_size"
+                    android:paddingStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:paddingEnd="22dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <android.support.wear.widget.BoxInsetLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:boxedEdges="left|right">
+
+
+                        <ImageButton
+                            android:id="@+id/exDetailsVideoPlayImage"
+                            android:background="@drawable/circular_button"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"
+                            android:src="@drawable/play_white"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/exercise_details_header_margin"/>
+                    </LinearLayout>
+                </android.support.wear.widget.BoxInsetLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/exDetailsSetHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:gravity="center"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/roboto"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/exerciseSets"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textSize="@dimen/exercise_details_info_size" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/exDetailsRepHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:gravity="center"
+
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/roboto"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/exerciseRep"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textSize="@dimen/exercise_details_info_size" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/exDetailsRestHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:gravity="center"
+
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/roboto"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/exerciseRest"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textSize="@dimen/exercise_details_info_size" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_margin="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/exDetailsDailyRepHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:gravity="center"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/roboto"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <ProgressBar
+                                android:id="@+id/exDetailsDailyRepProgressBar"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:indeterminate="false"
+                                android:progressDrawable="@drawable/circular_progress_bar"
+                                android:background="@drawable/circular_shape"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:max="100"
+                                android:progress="100"
+                                android:layout_gravity="center"/>
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/exerciseDailyRep"
+                                android:text="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_condensed_bold"
+                                android:textSize="@dimen/exercise_details_info_size"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                />
+                        </FrameLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/exDetailsWeeklyRepHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:gravity="center"
+
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/roboto"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ProgressBar
+                                android:id="@+id/exDetailsWeeklyRepProgressBar"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:indeterminate="false"
+                                android:progressDrawable="@drawable/circular_progress_bar"
+                                android:background="@drawable/circular_shape"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:max="100"
+                                android:progress="100"
+                                android:layout_gravity="center"/>
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/exerciseWeeklyRep"
+                                android:text="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_condensed_bold"
+                                android:textSize="@dimen/exercise_details_info_size"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                />
+                        </FrameLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_margin="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/exDetailsHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/exDetailsExpHeader"
+                        android:fontFamily="@font/roboto"
+                        android:layout_marginBottom="8dp"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="@dimen/exercise_details_info_header_size"/>
+
+                    <TextView
+                        android:id="@+id/exDetailsExpEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans"
+                        android:text="@string/dummy_text_short"
+                        android:textSize="16dp"
+                        android:paddingStart="32dp"
+                        android:layout_marginTop="12dp"
+                        android:paddingEnd="26dp"
+                        android:layout_marginBottom="42dp"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.wear.widget.BoxInsetLayout>
+
+    </ScrollView>
+    <ImageButton
+        android:id="@+id/exerciseDoneButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/white"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:src="@drawable/inset_done_button"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/roundedbutton2"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:textSize="20dp"
+        android:fitsSystemWindows="true"/>
+</RelativeLayout>

@@ -1,0 +1,53 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:paddingLeft="20dp"
+    android:theme="@style/AppThemeSwipeNoDismiss">
+
+    <EditText
+        android:id="@+id/pulse"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:hint="@string/custom_dialog_pulse_hint"
+        android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/diastole"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:hint="@string/custom_dialog_diastole_hint"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/systole"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/custom_dialog_systole_hint"
+        android:gravity="center_horizontal"
+        android:textSize="12sp"/>
+
+    <EditText
+        android:id="@+id/diabetes"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_horizontal"
+        android:fontFamily="sans-serif"
+        android:hint="@string/custom_dialog_diabetes_hint"
+        android:textSize="12sp"/>
+</LinearLayout>

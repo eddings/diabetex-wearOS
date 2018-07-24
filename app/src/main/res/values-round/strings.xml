@@ -1,0 +1,14 @@
+<resources>
+    <string name="hello_world">Hello Round World!</string>
+    <string name="saved_user_key">SavedUser</string>
+    <string name="logging_out_key">LoggingOutUser</string>
+    <string name="saved_user_isloggedin_key">SavedUserIsLoggedIn</string>
+    <string name="saved_user_uid_key">SavedUserUid</string>
+    <string name="saved_user_email_key">SavedUserEmail</string>
+    <string name="saved_user_name_key">SavedUserName</string>
+    <string name="saved_user_surname_key">SavedUserSurname</string>
+    <string name="saved_user_all_videos_downloaded_key">AllVideosDownloaded</string>
+    <string name="saved_user_file_key">SavedUserFile</string>
+
+
+</resources>

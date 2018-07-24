@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".activities.LoginActivity"
+    tools:deviceIds="wear">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|center"
+            android:src="@drawable/logo"
+            android:tint="@color/semitransparent_grey"
+            android:alpha="0.3"
+            />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        app:boxedEdges="all">
+        <EditText
+            android:id="@+id/loginEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_gravity="top"
+            />
+
+
+
+        <EditText
+            android:id="@+id/loginPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Parola"
+            android:inputType="textPassword"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/loginButton"
+            android:background="@drawable/circular_button"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:src="@drawable/done_white"
+            android:text="Giriş"
+            android:onClick="attemptLogin"
+            android:layout_gravity="bottom|center"/>
+    </FrameLayout>
+</android.support.wear.widget.BoxInsetLayout>
