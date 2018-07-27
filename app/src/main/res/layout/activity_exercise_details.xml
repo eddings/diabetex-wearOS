@@ -73,14 +73,16 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/exerciseDetailsSetHeader"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/exDetailsSetHeader"
-                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:fontFamily="@font/roboto"
                             android:gravity="center"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:fontFamily="@font/roboto"/>
+                            android:text="@string/exDetailsSetHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/exerciseSets"
@@ -97,15 +99,17 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:layout_weight="1">
+
                         <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/exerciseDetailsRepHeader"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/exDetailsRepHeader"
-                            android:textSize="@dimen/exercise_details_info_header_size"
-                            android:gravity="center"
+                            android:fontFamily="@font/roboto"
 
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:fontFamily="@font/roboto"/>
+                            android:gravity="center"
+                            android:text="@string/exDetailsRepHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/exerciseRep"
@@ -117,20 +121,23 @@
                             android:text="5"
                             android:textSize="@dimen/exercise_details_info_size" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/exerciseDetailsRestLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <android.support.v7.widget.AppCompatTextView
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/exDetailsRestHeader"
-                            android:textSize="@dimen/exercise_details_info_header_size"
+                            android:fontFamily="@font/roboto"
                             android:gravity="center"
 
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:fontFamily="@font/roboto"/>
+                            android:text="@string/exDetailsRestHeader"
+                            android:textSize="@dimen/exercise_details_info_header_size" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/exerciseRest"

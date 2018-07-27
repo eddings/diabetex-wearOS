@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -210,7 +211,20 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
          * */
 
         if(mExercise.getIsWalking()){
-                        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ImageButton exerciseVideoPlayImage = findViewById(R.id.exDetailsVideoPlayImage);
+            exerciseVideoPlayImage.setVisibility(View.GONE);
+
+            // Use and change set and rep texts for minimum and maximum speed to inform user
+            findViewById(R.id.exerciseDetailsRestLinearLayout).setVisibility(View.GONE);
+            ((TextView)findViewById(R.id.exerciseDetailsSetHeader)).setText(getResources().getString(R.string.exerciseDetailsActivityMinWalkingSpeedTitle));
+            ((TextView)findViewById(R.id.exerciseDetailsRepHeader)).setText(getResources().getString(R.string.exerciseDetailsActivityMaxWalkingSpeedTitle));
+            ((TextView)findViewById(R.id.exerciseSets)).setText(mExercise.getMinWalkingSpeed()+" m/sn");
+            ((TextView)findViewById(R.id.exerciseRep)).setText(mExercise.getMaxWalkingSpeed()+" m/sn");
+
+
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},OPEN_LOCATION_PERMISSION_REQUEST);

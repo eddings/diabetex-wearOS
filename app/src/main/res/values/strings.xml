@@ -53,4 +53,10 @@
     <string name="spentTimeForExerciseSoLowTitle">Süre Çok Kısa</string>
     <string name="spentTimeForExerciseSoLowBtnText">Egzersize Devam Et</string>
 
+    <!--
+    Exercise Details Activity Titles
+    !-->
+    <string name="exerciseDetailsActivityMinWalkingSpeedTitle">Minimum Hız</string>
+    <string name="exerciseDetailsActivityMaxWalkingSpeedTitle">Maksimum Hız</string>
+
 </resources>
