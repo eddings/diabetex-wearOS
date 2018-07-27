@@ -874,7 +874,8 @@ public class LocalDBHelper {
                 Exercise.ExerciseEntry.COLUMN_NAME_SETS,
                 Exercise.ExerciseEntry.COLUMN_NAME_UID,
                 Exercise.ExerciseEntry.COLUMN_NAME_VIDEO_LINK,
-                Exercise.ExerciseEntry.COLUMN_NAME_WEEKLY_REP
+                Exercise.ExerciseEntry.COLUMN_NAME_WEEKLY_REP,
+                Exercise.ExerciseEntry.COLUMN_NAME_IS_WALKING_EXERCISE
         };
 
         Cursor cursor = mDbReadable.query(
@@ -913,33 +914,38 @@ public class LocalDBHelper {
                     cursor.getColumnIndexOrThrow(Exercise.ExerciseEntry.COLUMN_NAME_UID));
             int weeklyRep = cursor.getInt(
                     cursor.getColumnIndexOrThrow(Exercise.ExerciseEntry.COLUMN_NAME_WEEKLY_REP));
+            int isWalking = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(Exercise.ExerciseEntry.COLUMN_NAME_IS_WALKING_EXERCISE));
 
 
-            File videoFile = new File(activity.getExternalFilesDir(null)
-                    + "/Android/data/"
-                    + activity.getApplicationContext().getPackageName()
-                    + "/Files/videos/"+exercisePid+"_"+eid+".mp4");
+            if(isWalking!=1){
+                File videoFile = new File(activity.getExternalFilesDir(null)
+                        + "/Android/data/"
+                        + activity.getApplicationContext().getPackageName()
+                        + "/Files/videos/"+exercisePid+"_"+eid+".mp4");
 
-            File imageFile = new File(activity.getExternalFilesDir(null)
-                    + "/Android/data/"
-                    + activity.getApplicationContext().getPackageName()
-                    + "/Files/images/"+exercisePid+"_"+eid+".gif");
+                File imageFile = new File(activity.getExternalFilesDir(null)
+                        + "/Android/data/"
+                        + activity.getApplicationContext().getPackageName()
+                        + "/Files/images/"+exercisePid+"_"+eid+".gif");
 
-            if (!videoFile.exists())
-            {
-                Log.d(TAG,"VIDEO FILE DOES NOT EXISTS: "+videoFile.getAbsolutePath());
-                videoLinks.add(counterVideo,videoLink);
-                videoFileNames.add(counterVideo,exercisePid+"_"+eid+".mp4");
-                counterVideo++;
+                if (!videoFile.exists())
+                {
+                    Log.d(TAG,"VIDEO FILE DOES NOT EXISTS: "+videoFile.getAbsolutePath());
+                    videoLinks.add(counterVideo,videoLink);
+                    videoFileNames.add(counterVideo,exercisePid+"_"+eid+".mp4");
+                    counterVideo++;
+                }
+
+
+                if (!imageFile.exists()){
+                    Log.d(TAG,"IMAGE FILE DOES NOT EXISTS: "+imageFile.getAbsolutePath());
+                    imageLinks.add(counterImage,photoLink);
+                    imageFileNames.add(counterImage,exercisePid+"_"+eid+".gif");
+                    counterImage++;
+                }
             }
 
-
-            if (!imageFile.exists()){
-                Log.d(TAG,"IMAGE FILE DOES NOT EXISTS: "+imageFile.getAbsolutePath());
-                imageLinks.add(counterImage,photoLink);
-                imageFileNames.add(counterImage,exercisePid+"_"+eid+".gif");
-                counterImage++;
-            }
         }
         String[] imageLinksArr = new String[imageLinks.size()];
         imageLinks.toArray(imageLinksArr);
