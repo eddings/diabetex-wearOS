@@ -150,8 +150,6 @@ public class AlarmManagerHelper extends BroadcastReceiver {
 
                     Intent resultIntent = new Intent(context, ProgramActivity.class);
                     int _id = (int) System.currentTimeMillis();
-                    // Because clicking the notification opens a new ("special") activity, there's
-                    // no need to create an artificial back stack.
                     PendingIntent resultPendingIntent =
                             PendingIntent.getActivity(
                                     context,

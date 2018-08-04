@@ -52,7 +52,7 @@ public class ExerciseActivity extends WearableActivity implements SensorEventLis
     private LocalDBHelper mLocalDBHelper;
     private UIHelper mUIHelper;
     private FirebaseDBHelper mFirebaseDbHelper;
-    private final int diabetesMin=100,diabetesMax=240,systoleMin=90,systoleMax=170,diastoleMin=50,diastoleMax=110,pulseMin=40,pulseMax=120;
+    private final int diabetesMin=80,diabetesMax=350,systoleMin=100,systoleMax=180,diastoleMin=80,diastoleMax=350,pulseMin=55,pulseMax=140;
     private int heartRate=0,numberOfMeasurement=0;
     private ProgressDialog pdLoading;
     private EditText pulseEditText;
