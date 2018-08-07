@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationService extends Service implements LocationListener {
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 10; // in Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 10000;
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 20000;
     private static LocationService mLocationService;
     Location startLocation;
     LocationManager locationManager;
@@ -126,28 +126,29 @@ public class LocationService extends Service implements LocationListener {
         if(startLocation==null)
             startLocation = location;
         else{
+            float currentSpeedKmOverHours = location.getSpeed()*60*60/1000;
             if(isBetterLocation(location,startLocation)){
                 walkedDistance+=location.distanceTo(startLocation);
                 startLocation = location;
 
-                if(location.getSpeed()<minSpeed){
-                    String title = "DAHA HIZLI - HIZINIZ: "+ String.format("%.1f",location.getSpeed());
+                if(currentSpeedKmOverHours<minSpeed){
+                    String title = "DAHA HIZLI - HIZINIZ: "+ String.format("%.1f",currentSpeedKmOverHours);
                     String body = "Minimum Hız: "+minSpeed+"\nMaksimum Hız: "+maxSpeed;
                     mUIHelper.createPermanentNotificationForSpeed(title,body,0);
                 }
-                else if(location.getSpeed()>maxSpeed)
+                else if(currentSpeedKmOverHours>maxSpeed)
                 {
-                    String title = "DAHA YAVAŞ - HIZINIZ: "+ String.format("%.1f",location.getSpeed());
+                    String title = "DAHA YAVAŞ - HIZINIZ: "+ String.format("%.1f",currentSpeedKmOverHours);
                     String body = "Minimum Hız: "+minSpeed+"\nMaksimum Hız: "+maxSpeed;
                     mUIHelper.createPermanentNotificationForSpeed(title,body,2);
                 }
-                else if(location.getSpeed()>=minSpeed && location.getSpeed()<=maxSpeed){
-                    String title = "BU HIZDA DEVAM ET - HIZINIZ: "+ String.format("%.1f",location.getSpeed());
+                else if(currentSpeedKmOverHours>=minSpeed && currentSpeedKmOverHours<=maxSpeed){
+                    String title = "BU HIZDA DEVAM ET - HIZINIZ: "+ String.format("%.1f",currentSpeedKmOverHours);
                     String body = "Minimum Hız: "+minSpeed+"\nMaksimum Hız: "+maxSpeed;
                     mUIHelper.createPermanentNotificationForSpeed(title,body,1);
                 }
 
-                walkingSpeeds.add(String.format("%.1f",location.getSpeed()));
+                walkingSpeeds.add(String.format("%.1f",currentSpeedKmOverHours));
             }
 
         }

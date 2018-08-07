@@ -20,17 +20,21 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,8 +59,8 @@ import java.util.List;
 public class ExerciseDetailsActivity extends WearableActivity implements SensorEventListener {
 
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 2000;
-
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 20000;
+    Chronometer chronometer;
     TextView mHeader, mInstruction, mSet, mRep, mRest, mDailyRep, mWeeklyRep;
     String eid, pid, videoLink, photoLink;
     DiabetWatchDbHelper mDbHelper;
@@ -82,7 +86,7 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
     List<String> walkingSpeeds;
     Location startLocation;
     Intent startIntent;
-
+    Boolean isStartedWalking=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,11 +158,28 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
         mRest = findViewById(R.id.exerciseRest);
         mDailyRep = findViewById(R.id.exerciseDailyRep);
         mWeeklyRep = findViewById(R.id.exerciseWeeklyRep);
+        if(mExercise.getIsWalking())
+            mDoneButton.setImageResource(R.drawable.inset_done_button_run);
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                elapsedTime = (System.currentTimeMillis()-startTime)/1000;
-                showExerciseDone();
+                if(mExercise.getIsWalking() && !isStartedWalking){
+                    mUIHelper.showSimpleAlertWithButton(getResources().getString(R.string.userCouldCloseScreenTitle),
+                            getResources().getString(R.string.userCouldCloseScreenMessage),
+                            getResources().getString(R.string.userCouldCloseScreenButtonTitle));
+                    isStartedWalking=true;
+                    mDoneButton.setImageResource(R.drawable.inset_done_button);
+                    mDoneButton.setBackgroundColor(getResources().getColor(R.color.redDark));
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    chronometer.start();
+                }
+                else{
+                    if(chronometer!=null)
+                        chronometer.stop();
+                    elapsedTime = (System.currentTimeMillis()-startTime)/1000;
+                    showExerciseDone();
+                }
+
             }
         });
 
@@ -211,7 +232,7 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
          * */
 
         if(mExercise.getIsWalking()){
-
+            setChronometer();
             ImageButton exerciseVideoPlayImage = findViewById(R.id.exDetailsVideoPlayImage);
             exerciseVideoPlayImage.setVisibility(View.GONE);
 
@@ -219,8 +240,8 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
             findViewById(R.id.exerciseDetailsRestLinearLayout).setVisibility(View.GONE);
             ((TextView)findViewById(R.id.exerciseDetailsSetHeader)).setText(getResources().getString(R.string.exerciseDetailsActivityMinWalkingSpeedTitle));
             ((TextView)findViewById(R.id.exerciseDetailsRepHeader)).setText(getResources().getString(R.string.exerciseDetailsActivityMaxWalkingSpeedTitle));
-            ((TextView)findViewById(R.id.exerciseSets)).setText(mExercise.getMinWalkingSpeed()+" m/sn");
-            ((TextView)findViewById(R.id.exerciseRep)).setText(mExercise.getMaxWalkingSpeed()+" m/sn");
+            ((TextView)findViewById(R.id.exerciseSets)).setText(mExercise.getMinWalkingSpeed()+" km/sa");
+            ((TextView)findViewById(R.id.exerciseRep)).setText(mExercise.getMaxWalkingSpeed()+" km/sa");
 
 
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -232,14 +253,11 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
 
             isLocationEnabled();
         }
-        else{
-            Log.d(TAG,"NOT WALKING EXERCISE");
-        }
+
     }
     private void isLocationEnabled() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            Log.d(TAG,"locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)  FALSE");
             AlertDialog.Builder alertDialog=new AlertDialog.Builder(this);
             alertDialog.setTitle("Konum Servislerini Etkinleştir");
             alertDialog.setMessage("Yürüme egzersizini yapabilmek için lütfen konum servislerinizi etkinleştiriniz.");
@@ -276,7 +294,6 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
             //resume tasks needing this permission
         }
         else{
@@ -353,6 +370,8 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
                 .setNegativeButton("VAZGEÇ",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         dialog.cancel();
+                        if(chronometer!=null)
+                            chronometer.start();
                     }
                 })
         ;
@@ -439,6 +458,18 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
 
             }
         });
+    }
+    private void setChronometer(){
+        chronometer = new Chronometer(this);
+        chronometer.setTextSize(64);
+
+        chronometer.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        params.setMargins(0,20,0,20);
+        chronometer.setLayoutParams(params);
+        LinearLayout mainLL = findViewById(R.id.exerciseDetailsMainLinearLayout);
+        mainLL.addView(chronometer,1);
     }
 
     public String getCurrentDate() {

@@ -58,5 +58,13 @@
     !-->
     <string name="exerciseDetailsActivityMinWalkingSpeedTitle">Minimum Hız</string>
     <string name="exerciseDetailsActivityMaxWalkingSpeedTitle">Maksimum Hız</string>
+    <string name="exerciseDetailsStartExerciseTitle">YÜRÜYÜŞE BAŞLA</string>
+    <string name="exerciseDetailsStopExerciseTitle">YÜRÜYÜŞÜ BİTİR</string>
+    <!--
+    Exercise Details Alert dialog messages and titles
+    !-->
+    <string name="userCouldCloseScreenMessage">Yürüyüş yaparken ekranı kapatabilirsiniz. \nHızınızı bildirimler ile kontrol edip ayarlayabilirsiniz. \n\nSarı: Hızlan \n\nYeşil: Olduğun Hızda Devam Et \n\nKırmızı: Yavaşla</string>
+    <string name="userCouldCloseScreenTitle">Hatırlatma</string>
+    <string name="userCouldCloseScreenButtonTitle">Yürüyüşe Başla</string>
 
 </resources>

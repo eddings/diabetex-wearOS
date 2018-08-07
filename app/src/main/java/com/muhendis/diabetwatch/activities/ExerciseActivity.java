@@ -302,7 +302,6 @@ public class ExerciseActivity extends WearableActivity implements SensorEventLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d(TAG,"BACK PRESSED");
     }
 
 
