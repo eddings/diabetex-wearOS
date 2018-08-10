@@ -6,8 +6,8 @@ android {
         applicationId "com.muhendis.diabetwatch"
         minSdkVersion 25
         targetSdkVersion 27
-        versionCode 8
-        versionName "1.4"
+        versionCode 9
+        versionName "1.41"
     }
     buildTypes {
         release {

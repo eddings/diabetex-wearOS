@@ -345,8 +345,10 @@ public class ExerciseDetailsActivity extends WearableActivity implements SensorE
                             if(mSensorManager!=null){
                                 mSensorManager.unregisterListener(activity);
                             }
-                            walkingSpeeds = LocationService.getInstance().walkingSpeeds;
-                            walkedDistance = LocationService.getInstance().walkedDistance;
+                            if(mExercise.getIsWalking()){
+                                walkingSpeeds = LocationService.getInstance().walkingSpeeds;
+                                walkedDistance = LocationService.getInstance().walkedDistance;
+                            }
                             StatisticsExerciseFirebaseDb statisticsExerciseFirebaseDb = new StatisticsExerciseFirebaseDb(getCurrentDate(), mExercise.getEid(),mExercise.getPid(),mExercise.getUid(),(int)elapsedTime,stepCounter,heartRate,walkingSpeeds,mExercise.getIsWalking(),walkedDistance);
                             mLocalDbHelper.insertStatisticsExercise(statisticsExerciseFirebaseDb,mFirebaseDbHelper);
                             if(startIntent!=null){
